@@ -26,7 +26,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 #
 
 ![O que é HTTP?](https://user-images.githubusercontent.com/69727594/142418569-fec7a598-9e5c-436b-9702-02215eed27e3.png)
-## O que é HTTP? ([🔝 Voltar ao topo](#apostila-http))
+## O que é HTTP? ([🔝 Voltar ao topo](#apostila-de-http))
 
 O HTTP, ou *Hypertext Transfer Protocol*, é um protocolo (conjunto de regras) de comunicação utilizado para sistemas de informação de hipermídia, distribuídos e colaborativos. Traduzindo, é ele que possibilita que as pessoas que inserem a URL de um site consigam ver os conteúdos e dados dele e ele é o **protocolo mais importante da internet!**
 
@@ -54,7 +54,7 @@ Assim como o idioma mais fácil para você é o português, o mais fácil para a
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
-## Agradecimentos e créditos ([🔝 Voltar ao topo](#apostila-http))
+## Agradecimentos e créditos ([🔝 Voltar ao topo](#apostila-de-http))
 Espero que você tenha gostado do conteúdo e que eu tenha conseguido te ajudar!
 
 Agradecimentos:
