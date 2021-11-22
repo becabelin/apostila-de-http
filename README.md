@@ -14,7 +14,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 
 ### Sumário:
 - [🧐 O que é HTTP?](#o-que-é-http--voltar-ao-topo)
-- 🖥️ A web segura - HTTPS (**Em breve**)
+- [🖥️ A web segura - HTTPS](#a-web-segura---https--voltar-ao-topo)
 - 🌍 Endereços sob seu domínio (**Em breve**)
 - 😉 O cliente pede e o servidor responde (**Em breve**)
 - 👨🏻‍💻 Depurando a requisição HTTP (**Em breve**)
@@ -51,6 +51,41 @@ Assim como o idioma mais fácil para você é o português, o mais fácil para a
 <br><br>
 > Ficou claro para você? Se sim, role para baixo para descobrir mais sobre o HTTP!<br>
 > Caso esteja com dúvidas, me manda uma mensagem no [LinkedIn](https://www.linkedin.com/in/rebecalvesousa), ou um [e-mail](mailto:becabelin@gmail.com)!
+
+#
+![A web segura - HTTPS](https://user-images.githubusercontent.com/69727594/142870414-746870d7-7ae1-467c-bd9b-e247708c6b17.png)
+## A web segura - HTTPS ([🔝 Voltar ao topo](#apostila-de-http))
+
+Sabemos que, ao usar o HTTP, *todos os dados* enviados entre o cliente e o servidor são transmitidos em **texto puro**. Isso é **perigoso**, uma vez que até seu **login e senha** podem ser vistos pelas *ferramentas do desenvolvedor do navegador* (na parte de Network).
+
+Além disso, quando o navegador solicita dados, estes passam por vários intermediadores até chegarem no servidor que os pediu.
+> Por exemplo, usando uma conexão Wi-Fi, os dados do navegador passam primeiro para o roteador Wi-Fi, e do roteador passam para o modem do provedor, do modem para algum servidor do provedor de internet.<br>
+> (Fonte: Alura)
+
+Resumindo, com o HTTP você corre riscos de ter seus dados vazados por intermediários.
+
+Para evitar perda de dados e garantir a sua segurança, existe o **HTTPS**. Ele é como o HTTP comum (inclusive a única diferença nas palavras é o S no final), mas ele tem uma camada de segurança/criptografia a mais. Antes a camada era SSL, porém hoje ela é TLS (ainda se tratam da mesma questão de segurança).
+
+- HTTPS: Hyper Text Transfer Protocol Secure
+- SSL/TSL: Secure Sockets Layer / Transport Layer Security
+
+<img align="left" src="https://user-images.githubusercontent.com/69727594/142886593-ddc4d685-b6b6-4ccf-8539-b9b711e84fc6.png" width="500">
+
+Se você reparar, ao lado esquerdo de um site HTTPS, você verá um cadeado. Ele significa que o site em que você está é seguro, ou seja, você não correrá o risco de ter seus dados vazados em algum momento.
+
+O HTTPS usa criptografia baseada em chaves públicas e privadas e para gerar essas chaves é preciso garantir a identidade de quem possui essas chaves. Para garantir essa identidade em seu site, você precisará de um **certificado digital**. Um certificado digital é utilizado para identificar determinada entidade e a para geração das chaves de criptografia.
+
+Depois do certificado, é preciso que uma autoridade certificadora, que nada mais é que um órgão ou entidade confiável (como a [COMODO RSA Domain Validation](https://comodosslstore.com/resources/what-is-comodo-rsa-certification-authority/)), garanta não apenas a identidade do site mas também a validade desse certificado.
+
+👦🏻 : Legal, mas como tudo isso funciona?
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/142886484-43dced06-e352-4af3-aa38-e9d514573b06.png" width="500">
+
+1 - Os navegadores que tem uma chave pública criptografam as informações<br>
+2 - Essas informações são enviadas para o servidor<br>
+3 - O servidor as descriptografa com a chave privada<br>
+
+É importante notar que apenas a chave privada descriptografa as informações criptografadas com a pública, e também que deve-se manter a chave privada segura. Além disso, o certificado digital tem data de validade, então se ela expirar e você não renovar o certificado, seu site deixará de ser seguro!
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
