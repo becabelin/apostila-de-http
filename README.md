@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/20/"(https://progress-bar.dev/20/ width="130")>
+    <img src="https://progress-bar.dev/30/"(https://progress-bar.dev/30/ width="130")>
  </p>
 <br><br>
 
