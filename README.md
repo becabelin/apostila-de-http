@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/40/"(https://progress-bar.dev/40/ width="130")>
+    <img src="https://progress-bar.dev/42/"(https://progress-bar.dev/42/ width="130")>
  </p>
 <br><br>
 
@@ -16,7 +16,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 - [🧐 O que é HTTP?](#o-que-é-http--voltar-ao-topo)
 - [🖥️ A web segura - HTTPS](#a-web-segura---https--voltar-ao-topo)
 - [🌍 Endereços sob seu domínio](#endereços-sob-seu-domínio--voltar-ao-topo)
-- 😉 O cliente pede e o servidor responde (**Em breve**)
+- [😉 O cliente pede e o servidor responde](o-cliente-pede-e-o-servidor-responde--voltar-ao-topo)
 - 👨🏻‍💻 Depurando a requisição HTTP (**Em breve**)
 - 📐 Parâmetros da requisição (**Em breve**)
 - 🤓 Serviços na web com REST (**Em breve**)
@@ -137,6 +137,19 @@ Agora, repare no site ```https://seusite.com.br:443/inicio```. Você sabe o sign
 Ele se chama *recurso*. Dando como exemplo o site da Alura, existem diversos recursos lá: para ver as carreiras tem o ```/careers```, já para visualizar os fóruns tem o ```/forum```, para ver a sua dashboard tem o ```/dashboard``` e por aí vai. Basicamente, os recursos são caminhos para acessar as funcionalidades/páginas do site que você está acessando.
 
 Então, se você perceber todos os sites seguem este padrão: ```protocolo://dominio:porta/caminho/recurso```. Esse padrão é a nossa famosa URL, que eu falei lá em cima! Então, as URLs são os endereços na web! Super legal, né?
+
+#
+![](https://user-images.githubusercontent.com/69727594/142953447-bf52f888-974f-49a6-8fdf-682180d4fef0.png)
+## O cliente pede e o servidor responde ([🔝 Voltar ao topo](#apostila-de-http))
+
+Já sabemos bastante sobre o HTTP, não é mesmo? Só que ainda tem mais coisas, viu? 😅
+
+Quando queremos fazer login em algum site, preenchemos o formulário e clicamos no botão de enviar. O navegador envia o nosso login e a nossa senha para o servidor através do protocolo HTTP, certo?
+
+No mundo HTTP, a requisição enviada pelo navegador para o servidor é chamada de **HTTP REQUEST**.<br>
+Se o nosso login for válido, somos direcionados para outra página, e essa essa resposta no mundo HTTP é chamada de **HTTP RESPONSE**.
+
+A comunicação segue **sempre** esse modelo: o cliente **envia uma requisição** e o servidor **responde**. Ela (a comunicação) **sempre começa com o cliente**: é ele quem pede as informações. O servidor responde **apenas** o que foi requisitado e **nunca inicia a comunicação**!
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
