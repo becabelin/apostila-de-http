@@ -16,7 +16,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 - [🧐 O que é HTTP?](#o-que-é-http--voltar-ao-topo)
 - [🖥️ A web segura - HTTPS](#a-web-segura---https--voltar-ao-topo)
 - [🌍 Endereços sob seu domínio](#endereços-sob-seu-domínio--voltar-ao-topo)
-- [😉 O cliente pede e o servidor responde](o-cliente-pede-e-o-servidor-responde--voltar-ao-topo)
+- [😉 O cliente pede e o servidor responde](#o-cliente-pede-e-o-servidor-responde--voltar-ao-topo)
 - 👨🏻‍💻 Depurando a requisição HTTP (**Em breve**)
 - 📐 Parâmetros da requisição (**Em breve**)
 - 🤓 Serviços na web com REST (**Em breve**)
