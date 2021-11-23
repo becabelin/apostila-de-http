@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/30/"(https://progress-bar.dev/30/ width="130")>
+    <img src="https://progress-bar.dev/40/"(https://progress-bar.dev/40/ width="130")>
  </p>
 <br><br>
 
@@ -15,7 +15,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 ### Sumário:
 - [🧐 O que é HTTP?](#o-que-é-http--voltar-ao-topo)
 - [🖥️ A web segura - HTTPS](#a-web-segura---https--voltar-ao-topo)
-- 🌍 Endereços sob seu domínio (**Em breve**)
+- [🌍 Endereços sob seu domínio](#endereços-sob-seu-domínio--voltar-ao-topo)
 - 😉 O cliente pede e o servidor responde (**Em breve**)
 - 👨🏻‍💻 Depurando a requisição HTTP (**Em breve**)
 - 📐 Parâmetros da requisição (**Em breve**)
@@ -88,6 +88,57 @@ Depois do certificado, é preciso que uma autoridade certificadora, que nada mai
 É importante notar que apenas a chave privada descriptografa as informações criptografadas com a pública, e também que deve-se manter a chave privada segura. Além disso, o certificado digital tem data de validade, então se ela expirar e você não renovar o certificado, seu site deixará de ser seguro!
 
 #
+![Endereços sob seu domínio](https://user-images.githubusercontent.com/69727594/142948618-e0b340a4-a42b-47d4-83a0-e915ba1a6e66.png)
+## Endereços sob seu domínio ([🔝 Voltar ao topo](#apostila-de-http))
+
+Recapitulando os capítulos anteriores, os sites serão escritos com o começo ```http://www.seusite.com.br```(não seguro) ou ```https://www.seusite.com.br```(seguro). O que você não sabe ainda (ou sabe?) é que o ```www.seusite.com.br``` não é necessariamente o *nome do seu site*, mas o nome do seu **domínio**!
+
+<img align="left" src="https://user-images.githubusercontent.com/69727594/142949364-2fc69ad3-8123-4fb4-957f-0d907132b95f.png" width="300">
+
+Analisando o site ```https://www.seusite.com.br```, vemos que, da direita para a esquerda, a primeira palavra é o ```br```. O ```br``` é o *top level domain*, ou seja, está na raiz do domínio. Logo depois vem o ```com```, que é a abreviação de *comercial* e o ```seusite```, os dois são **subdomínios**.
+
+> Para saber mais:<br>
+> A abreviação ```www``` representa o [***world wide web***](https://www.google.com/search?client=opera-gx&q=world+wide+web&sourceid=opera&ie=UTF-8&oe=UTF-8).<br>
+> O ```www``` é opcional, já que, com ou sem ele, a mesma página aparecerá. Contudo, o uso ainda é muito popular.
+
+Os **subdomínios** são como sessões específicas dentro de um site. Um exemplo no curso da Alura é o do Google. No Gmail temos o endereço: ```mail.google.com``` e no Google Drive: ```drive.google.com```. Tanto o Gmail como o Drive são **subdomínios** do domínio Google.
+
+Esses subdomínios apontam para páginas diferentes dentro do mesmo domínio (Google).
+
+Pra te mandar a real, os domínios foram organizados em uma hierarquia criada só para organizar os sites dentro da internet e a gente poder lembrar dos nomes. Ou seja, a internet funciona tranquilamente sem os domínios.
+
+👦🏻 : Mas se as máquinas não precisam dos nomes, como elas chegam nos sites?
+
+Bem, elas usam o que se chama de endereços de IP, que nada mais são do que números - o que é muito difícil da gente decorar.
+
+Mas não se preocupe com números! IP's são mais importantes para quem trabalha com rede. O desenvolvedor normalmente não precisa mexer com isso.
+
+👦🏻 : Só que a gente não entra nos sites usando o IP, então como o domínio consegue pegar esse IP e transformar numa [URL](https://www.google.com/search?client=opera-gx&q=url&sourceid=opera&ie=UTF-8&oe=UTF-8)?
+
+Quando digitamos a URL de um site, essa URL é transformada em um número pelo [DNS (Domain Name System)](https://aws.amazon.com/pt/route53/what-is-dns/).
+O DNS é um serviço transparente que age como um grande banco de dados de domínios. Então, quando você digitar a URL de um site, o DNS a transforma em um IP e você consegue acessar! Incrível, não? 🤩
+
+> Não diz que fui eu quem te contou (até porque eu roubei essa informação da Alura 😆), mas você pode escolher um servidor DNS de preferência! Inclusive, um dos mais utilizados é o da própria [Google](https://developers.google.com/speed/public-dns/)
+
+Sabendo de todas essas coisas, imagine que o servidor é uma casa. Se for uma mansão, ela terá várias portas; e se for uma casinha pequena, terá umas 2 ou 3, certo? Os servidores são assim também, eles podem ter várias portas e o que você precisa saber é qual porta utilizar quando chegar na casa. Ou seja, você deve saber qual porta é utilizada para os protocolos HTTP e HTTPS!
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/142951437-95870f7c-fe45-46ef-851e-f4a071ad2d76.png" width="300">
+
+A porta padrão reservada para o protocolo HTTP é o ```80``` e a do HTTPS é o ```443```. Se você digitar ```:80``` no final da URL de um site HTTP (como no exemplo da Alura ```http://www.alura.com.br:80```) ou ```:443``` no final de um site HTTPS, verá o próprio navegador a escondendo. Porém, se você trocar o 80 e 443, por exemplo, por 81 e 442, verá que os site não conseguirão carregar.
+
+👦🏻 : Por que isso acontece?
+
+Simplesmente porque a porta não está aberta. Não podemos estabelecer uma conexão e o tempo de conexão vai esgotar.
+
+> Vários protocolos têm a sua própria porta padrão, como o FTP que usa ```21``` e o SSH que usa ```22```.
+
+Agora, repare no site ```https://seusite.com.br:443/inicio```. Você sabe o significado de tudo até o 443, certo? Agora, sabe me dizer o que é o ```/inicio```?
+
+Ele se chama *recurso*. Dando como exemplo o site da Alura, existem diversos recursos lá: para ver as carreiras tem o ```/careers```, já para visualizar os fóruns tem o ```/forum```, para ver a sua dashboard tem o ```/dashboard``` e por aí vai. Basicamente, os recursos são caminhos para acessar as funcionalidades/páginas do site que você está acessando.
+
+Então, se você perceber todos os sites seguem este padrão: ```protocolo://dominio:porta/caminho/recurso```. Esse padrão é a nossa famosa URL, que eu falei lá em cima! Então, as URLs são os endereços na web! Super legal, né?
+
+#
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
 ## Agradecimentos e créditos ([🔝 Voltar ao topo](#apostila-de-http))
 Espero que você tenha gostado do conteúdo e que eu tenha conseguido te ajudar!
@@ -97,3 +148,5 @@ Agradecimentos:
 
 Créditos e fontes:
 - [Rock Content](https://rockcontent.com/br/blog/http/)
+- Pai de todos, o famoso [Google](https://www.google.com)
+- [Amazon AWS](https://aws.amazon.com/pt/route53/what-is-dns/)
