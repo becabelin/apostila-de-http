@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/70/"(https://progress-bar.dev/70/ width="130")>
+    <img src="https://progress-bar.dev/80/"(https://progress-bar.dev/80/ width="130")>
  </p>
 <br><br>
 
@@ -19,7 +19,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 - [😉 O cliente pede e o servidor responde](#o-cliente-pede-e-o-servidor-responde--voltar-ao-topo)
 - [👨🏻‍💻 Depurando a requisição HTTP](#depurando-a-requisição-http--voltar-ao-topo)
 - [📐 Parâmetros da requisição](#parâmetros-da-requisição--voltar-ao-topo)
-- 🤓 Serviços na web com REST (**Em breve**)
+- [🤓 Serviços na web com REST](#serviços-na-web-com-rest--voltar-ao-topo)
 - 🌱 HTTP2 - Por uma web mais eficiente (**Em breve**)
 - 🤩 Final (**Em breve**)
 - [🥰 Agradecimentos e créditos](#agradecimentos-e-créditos--voltar-ao-topo)
@@ -270,6 +270,79 @@ Quando usamos mais do que, um parâmetro devemos usar & para separá-los:
 Saiba que existem outros métodos HTTP como o ```DELETE``` e ```PUT```. O ```DELETE``` existe para enviar uma requisição com a intenção de **remover um recurso**, ```PUT``` para **atualizar**. No entanto, esses métodos são **poucos utilizados no desenvolvimento de aplicações web**, eles são mais importantes quando se tratam de **serviços web**.
 
 Em geral, há **mais recursos** que o protocolo HTTP oferece, como **vários outros cabeçalhos** que especificam mais a requisição e resposta. Nessa apostila vimos os mais importantes métodos, códigos e cabeçalhos do protocolo HTTP.
+
+#
+![Serviços na web com REST](https://user-images.githubusercontent.com/69727594/144248302-62b2b3fb-8e05-4793-beec-5ed0a6de5eb6.png)
+## Serviços na web com REST ([🔝 Voltar ao topo](#apostila-de-http))
+Será que toda a requisição HTTP sempre tem como origem um navegador? E toda resposta só possui conteúdo que ele entende: HTML, CSS, Javascript e imagens?
+
+Bom, neste capítulo você terá as respostas para as suas perguntas!
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/144248936-7b375551-9447-4c1d-b26c-9f7f0fefe118.png" width="200">
+
+Hoje existem milhões de softwares rodando ou sendo desenvolvidos em várias linguagens de programação e frameworks. Tais softwares não vivem necessariamente isolados e podem querer se comunicar de alguma forma.
+
+Um exemplo clássico é o login via rede social/google que estamos cada vez mais habituados. Sabe quando queremos entrar, por exemplo, no Instagram e você pode se conectar pelo Facebook? Então, é exatamente isso! Essa conversa acaba sendo transparente para nós, usuários, já que exige uma autorização de acesso às nossas informações.
+
+As aplicações que disponibilizam serviços para outras são chamadas de **webservices**. Temos serviços web para trabalhar com pagamentos (como o Paypal), upload de imagens, transformação de CEP em endereços textuais e diversos outros. Tudo isso é feito através do poderoso protocolo HTTP.
+
+Você muito provavelmente já teve uma péssima experiência quando estava sem conexão com a internet usando um aplicativo móvel. Alguns apps não funcionam sem um acesso a rede porque as principais funcionalidades são feitas via requisições HTTP.
+
+Essas requisições são implementadas programaticamente pelo desenvolvedor. Podemos implementá-las em várias linguagens de programação: Java, PHP, Javascript etc.
+
+Usando o exemplo do curso da Alura, a *AluraFood* tem duas equipes em ação: a do **serviço web (ou simplesmente API web)** e a dos **apps mobile(Android e iOS)**.
+Os desenvolvedores responsáveis pela tela de listagem de restaurantes vão precisar **receber do serviço** os **detalhes de cada restaurante**. Felizmente o pessoal responsável pelo webservice já documentou exatamente o que seria necessário:
+
+```Listagem de todos os restaurantes --> GET - http://alurafood.com/api/restaurante```
+
+<img align="center" src="https://user-images.githubusercontent.com/69727594/144250346-9040fd13-4db8-448e-96b1-28cdbc9412ed.png" width="550">
+
+Perceba que, como resposta desse código, temos uma listagem de restaurante sendo apresentada dentro de uma tabela (elemento table do HTML) e cada linha (elemento tr) possui 4 colunas (td). Dentro de cada coluna temos as informações dos restaurantes: nome, nota de avaliação, endereço e logo.
+
+Os responsáveis precisarão realizar uma análise do conteúdo HTML e extrair dele somente as informações necessárias. Esse ato de analisar o documento é chamado de realizar um **parsing** do arquivo. Veja que o HTML tem muito mais do que o necessário para essa equipe. Para piorar, estamos trafegando muito mais informações do que o necessário e onerando até mesmo a banda do nosso usuário. Muito chato, não? 😑
+
+Pensando nessa deficiência do HTML, temos outros formatos que fazem mais sentido quando uma representação de um recurso (um restaurante) se faz necessário. Temos como exemplo mais legível o **XML (eXtensible Markup Language)** que poderia ser devolvido como resposta e ter o seguinte conteúdo:
+
+<img align="center" src="https://user-images.githubusercontent.com/69727594/144251091-0ac0f503-26fd-4992-bca0-56e0ba448dff.png" width="550">
+
+Outro famoso formato e onerando menos ainda a rede, por ser mais leve, é o **JSON (JavaScript Object Notation)**:
+
+<img align="center" src="https://user-images.githubusercontent.com/69727594/144251274-1305387a-7c59-423a-aa99-585755e88283.png" width="550">
+
+Mas como especificar à aplicação de serviço que gostaríamos de receber em um formato JSON? Via **cabeçalho HTTP**!
+
+Para indicar que queremos resposta no formato JSON usa-se um **Accept: application/json** como cabeçalho HTTP. Por outro lado, já na resposta uma indicação desse conteúdo é especificado pelo cabeçalho **Content-Type: application/json**.
+
+Tudo certo para a listagem de restaurantes. Mas será que o app AluraFood se resume a listar restaurantes? Provavelmente não, dado que o usuário efetua pedidos, um restaurante tem cardápio que poderia sofrer alterações e por aí vai.
+
+Algumas funcionalidades específicas aos responsáveis de um restaurante podem ser necessárias. E para isso o webservice deveria estar preparado também para lidar com essa necessidade:
+```Listagem de todos os restaurantes --> GET - /restaurante```<br>
+```Adicionar um  restaurante --> POST - /restaurante```
+
+Perceba que no exemplo fictício as duas primeiras URIs são idênticas e a funcionalidade muda completamente a partir do método HTTP usado:<br>
+GET -> Listagem<br>
+POST -> Criação<br>
+
+Logo podemos perceber que o **padrão** usado pela equipe do webservice define que uma **requisição web** tem **três tipos de componentes importantes**: recursos (URI), operações (GET, POST, PUT, DELETE/...) e representação de dados(XML, JSON, ...).
+
+Esses três componentes em conjuntos seguindo algumas práticas são a base para o modelo arquitetural **REST (Representational State Transfer)** ou em português **Transferência de Estado Representacional**.
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/144252917-c6ceb777-8374-414d-a5e5-01581ebf6e3d.png" width="400">
+
+Ao criar as URIs do nosso sistema devemos levar em conta que elas representam recursos, não ações. Em sistemas REST, nossas URIs devem conter **apenas substantivos**, que são nossos recursos: ```/restaurante/adiciona``` **não é uma boa URI**, pois **contém um verbo** e **não está identificando um recurso**, mas sim uma **operação**.
+
+> Para representar a adição de um restaurante podemos usar a URI /restaurante com o método HTTP POST, que representa que estamos adicionando alguma informação no sistema.
+
+O protocolo HTTP possui operações através de métodos como: ```GET```, ```POST```, ```PUT``` e ```DELETE```.
+Cada método tem uma semântica diferente e juntando o método à URI deveríamos conseguir representar todas as ações do nosso sistema.
+
+As semânticas principais são:
+- ```GET``` - **recupera informações** sobre o **recurso identificado pela URI**. Uma requisição GET **não deve modificar nenhum recurso do seu sistema**, ou seja, não deve ter nenhum **efeito colateral**, você **apenas recupera informações do sistema**.
+- ```POST``` - **adiciona informações** usando o recurso da URI passada. Pode **adicionar informações a um recurso** ou **criar um novo recurso**.
+- ```PUT``` - **adiciona (ou modifica)** um recurso na URI passada.
+- ```DELETE``` - **remove o recurso** representado pela URI passada.
+
+Quando fazemos uma aplicação não trafegamos um recurso pela rede, apenas uma representação dele. E essa representação pode ser feita de diferentes formas como JSON, XML ou HTML. Finalizando, nossas URIs devem **representar recursos**, as operações no recurso devem ser indicadas pelos **métodos HTTP** e podemos falar **qual é o formato em que conversamos com o servidor** com o **Content-Type** e **Accept** que são **cabeçalhos do HTTP**.
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
