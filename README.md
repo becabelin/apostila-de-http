@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/60/"(https://progress-bar.dev/60/ width="130")>
+    <img src="https://progress-bar.dev/70/"(https://progress-bar.dev/70/ width="130")>
  </p>
 <br><br>
 
@@ -18,7 +18,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 - [🌍 Endereços sob seu domínio](#endereços-sob-seu-domínio--voltar-ao-topo)
 - [😉 O cliente pede e o servidor responde](#o-cliente-pede-e-o-servidor-responde--voltar-ao-topo)
 - [👨🏻‍💻 Depurando a requisição HTTP](#depurando-a-requisição-http--voltar-ao-topo)
-- 📐 Parâmetros da requisição (**Em breve**)
+- [📐 Parâmetros da requisição](#parâmetros-da-requisição--voltar-ao-topo)
 - 🤓 Serviços na web com REST (**Em breve**)
 - 🌱 HTTP2 - Por uma web mais eficiente (**Em breve**)
 - 🤩 Final (**Em breve**)
@@ -235,6 +235,41 @@ No dia a dia os códigos **200**, **404** e **500** são de longe os **mais util
 
 > Dica do dia:
 > Veja os códigos http como [cachorros](https://httpstatusdogs.com) ou [gatinhos](https://http.cat)!
+
+#
+![Parâmetros da requisição](https://user-images.githubusercontent.com/69727594/144240266-2e6e209e-dcb1-4747-98d8-e9f85341380b.png)
+## Parâmetros da requisição ([🔝 Voltar ao topo](#apostila-de-http))
+
+Digamos que você entre no YouTube e pesquise por vídeos de Hora de Aventura (🎶 a aventura vai começar 🎶). Note que, ao pesquisar no YouTube, a URL mudou um pouco. O recurso acessado pela busca se chama /results (os resultados da pesquisa) mas agora temos um parâmetro da requisição, indicado pela ?: https://www.youtube.com/results?search_query=Hora+de+Aventura
+
+O parâmetro se chama ```search_query``` com o valor ```Ayrton+Senna```. Esses parâmetros da URL normalmente são chamados de **Query Params**. O HTTP permite enviar mais de um parâmetro, basta concatenar o próximo parâmetro através do caractere **&**.
+
+Por exemplo, a busca avançada do Google usa vários parâmetros para refinar a pesquisa como o idioma, o país ou data. Veja como o Google concatena os Query Params: https://www.google.com.br/?gws_rd=ssl#lr=lang_pt&tbs=lr:lang_1pt&q=neymar
+
+No console sempre aparece o tipo (ou método) da requisição, sendo **GET**. O GET é útil quando queremos deixar os parâmetros visíveis, pois assim podemos facilmente guardar a URL com os parâmetros para repetir a requisição algum momento depois. Mas será que isso também é uma boa opção na hora de enviar credenciais como login e senha? Queremos que apareça a senha de um usuário na URL?
+
+Imagina que você efetue o login no seu banco e na URL apareça: https://www.bb.com.br/login?login=euzinho&password=supersecreto
+Isso não é nada legal, né? Acabou com todo o segredo! 😫
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/144245966-372edb19-4e9b-44b5-85bf-46df2adf189f.png" width="600">
+
+Vamos efetuar um login na Alura para ver como esse sistema **envia dados do usuário para o servidor**. Repare que a URL para enviar o **login e senha** se chama https://www.alura.com.br/signin. Repare também que o método HTTP utilizado mudou. Estamos usando o **HTTP POST**. Com o POST, o navegador envia os dados do formulário no corpo da requisição e não na URL (se fosse um GET, todos os dados seriam enviados através da URL) Como a Alura não deseja que os dados do login e senha apareçam na URL do navegador, foi utilizado um **HTTP POST**.
+
+Um outro exemplo de um método POST na Alura é quando criamos uma pergunta no forum (usuário submete um formulário com dados). O método POST foi inicialmente pensado para criar algo novo no servidor como acabamos de fazer. No entanto, nem sempre isso é utilizado dessa maneira. Por exemplo, acabamos de usar um POST para verificar o login, ou seja, não alteramos ou adicionamos nada na Alura, apenas o usamos para esconder os parâmetros (seu login e senha).
+
+Como o servidor realmente reage quando recebe uma requisição POST depende da implementação, depende da lógica atrás. Os métodos como GET e POST definem uma intenção mas o que realmente será executado depende do servidor.
+
+Resumindo, no dia a dia, usamos GET para fazer pesquisas mas também para alterar ou remover algo no servidor. Com o POST, o usamos para inserir e alterar dados, como também para pesquisar.
+
+Quando enviamos parâmetros na URL, devemos iniciar pelo ?, o nome do parâmetro e um =, para separar o nome do parâmetro do seu valor:
+```?nome_do_parametro=seu_valor```
+<br>
+Quando usamos mais do que, um parâmetro devemos usar & para separá-los:
+```?nome_do_parametro=seu_valor&nome_do_outro_param=valor```
+
+Saiba que existem outros métodos HTTP como o ```DELETE``` e ```PUT```. O ```DELETE``` existe para enviar uma requisição com a intenção de **remover um recurso**, ```PUT``` para **atualizar**. No entanto, esses métodos são **poucos utilizados no desenvolvimento de aplicações web**, eles são mais importantes quando se tratam de **serviços web**.
+
+Em geral, há **mais recursos** que o protocolo HTTP oferece, como **vários outros cabeçalhos** que especificam mais a requisição e resposta. Nessa apostila vimos os mais importantes métodos, códigos e cabeçalhos do protocolo HTTP.
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
