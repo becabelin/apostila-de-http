@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/50/"(https://progress-bar.dev/50/ width="130")>
+    <img src="https://progress-bar.dev/60/"(https://progress-bar.dev/60/ width="130")>
  </p>
 <br><br>
 
@@ -17,7 +17,7 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 - [🖥️ A web segura - HTTPS](#a-web-segura---https--voltar-ao-topo)
 - [🌍 Endereços sob seu domínio](#endereços-sob-seu-domínio--voltar-ao-topo)
 - [😉 O cliente pede e o servidor responde](#o-cliente-pede-e-o-servidor-responde--voltar-ao-topo)
-- 👨🏻‍💻 Depurando a requisição HTTP (**Em breve**)
+- [👨🏻‍💻 Depurando a requisição HTTP](#depurando-a-requisição-http--voltar-ao-topo)
 - 📐 Parâmetros da requisição (**Em breve**)
 - 🤓 Serviços na web com REST (**Em breve**)
 - 🌱 HTTP2 - Por uma web mais eficiente (**Em breve**)
@@ -178,6 +178,62 @@ A ideia de manter dados entre requisições é algo muito comum no desenvolvimen
 Resumindo, uma sessão HTTP nada mais é que um **tempo que o cliente permanece ativo no sistema**. Ou seja, quando você se desloga de um site, ele termina a sua sessão.
 
 #
+![Depurando a requisição HTTP](https://user-images.githubusercontent.com/69727594/144232320-ac0632f8-0db4-40e0-ae38-1cedd59fc13d.png)
+## Depurando a requisição HTTP ([🔝 Voltar ao topo](#apostila-de-http))
+
+Para mostrar mais detalhes sobre a comunicação HTTP, navegadores mais populares como Google Chrome, Mozilla Firefox ou Microsoft Edge possuem ferramentas e plugins que visualizam como o navegador trabalha e usa o HTTP.
+
+> Para habilitar as ferramentas do desenvolvedor no Chrome vá ao menu à direita (as reticências na vertical): **Mais ferramentas -> Ferramentas do desenvolvedor, ou no menu superior: Ferramentas -> Ferramentas do desenvolvedor**. Após isso, selecionamos a aba **Network**.<br><br>
+> No Firefox vá ao menu superior: **Ferramentas -> Desenvolvedor web -> Exibir/Ocultar ferramentas**.<br><br>
+> Para o Internet Explorer aperte a tecla **F12** para abrir o **console do desenvolvedor** e selecione a aba **Rede (ou Network)**.
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/144234189-70ee0b60-695d-43e1-838b-bf30477cc250.png" width="700">
+Usando o site da Alura como exemplo, no console podemos ver todas as requisições HTTP executadas pelo Chrome. Não só isso, mas também aparecem alguns códigos e métodos, além do tempo de execução para cada requisição. Repare que chamamos apenas o http://www.alura.com.br, mas foram feitas várias outras requisições em seguida.
+
+Na primeira coluna aparece a URL (o endereço) e na segunda coluna o método HTTP (indica qual é a intenção ou ação dessa requisição). Queremos receber informações, sem modificar algo no servidor, que é justamente a ideia do método GET, ou seja, enviamos uma requisição com ela.
+
+Como resposta recebemos o código de status **301**. O protocolo HTTP define alguns códigos padrões para esclarecer a resposta. Indo com o mouse em cima do 301 o Chrome mostra o significado desse código: **Moved Permanently**. Ou seja, o site Alura foi movido para outro lugar.
+
+👦🏻 : Ué, então para onde ele foi?
+
+<img align="left" src="**https://user-images.githubusercontent.com/69727594/144234714-512d3ac7-23e9-4b32-8710-519788b0934b.png**" width="600">
+
+A localização ou a URL concreta está na **resposta HTTP**. Ao clicar em cima do código de status 301 para receber mais informações, o Chrome mostra todos os cabeçalhos da requisição e da resposta. Dentro do item **Response Headers** podemos ver todos os cabeçalhos que o servidor devolveu e logo apareceu um com o nome **Location**. Esse cabeçalho indica a nova URL, só que agora usando **https**.
+
+Resumindo, quando o navegador recebe o status **301** ele já sabe que é preciso enviar uma **nova requisição** e procura a **nova URL** no cabeçalho de resposta **Location**.
+
+Se alguém acessa a Alura usando http (inseguro) automaticamente é chamado o site seguro (https). Isto é um comportamento muito comum para garantir que usamos https sempre. Se esquecermos de usar https, o servidor devolve o status 301 com a nova localização, mas agora usando https.
+Ao receber o código **301**, o navegador chama automaticamente a nova URL. No mundo de desenvolvimento web este comportamento é chamado de **Redirecionamento pelo navegador**, ou **Redirecionamento no lado do cliente**, pois fomos redirecionados para o recurso correto.
+
+O código **200** é um dos códigos mais comuns e significa que tudo deu certo! Dessa vez não foi preciso fazer um redirecionamento (não tem o cabeçalho Location na resposta) e não deu nenhum outro problema.
+
+<img align="right" src="https://user-images.githubusercontent.com/69727594/144236055-91371167-d8ec-4369-8efa-4b14a0eded78.png" width="300">
+
+No console também podemos ver que aparecem mais requisições (cada linha representa um novo request). Quando o servidor devolve a resposta para o navegador vem o conteúdo da página inicial em um formato especial, chamado de **HTML**. É ele que define a estrutura da nossa página, ou seja, os menus, botões, links, etc. Mas, lembre-se, dentro do HTML não vêm as imagens e outros arquivos necessários para deixar o site perfeito. Dentro dele vem apenas a URL (endereço) desses outros recursos.
+
+Então, ao receber o HTML, o navegador dispara várias outras requisições para carregar as imagens, fontes e outros dados. Como também são requisições HTTP, o console mostra suas informações. Podemos ver que na resposta vem o tipo do conteúdo, por exemplo text/html, text/css, image/svg+xml, entre outros.
+
+Enfim, o protocolo HTTP não está preso em algum formato específico, podemos trafegar qualquer informação com ele.
+
+<img align="left" src="https://user-images.githubusercontent.com/69727594/144236688-2b6e736c-bc05-43a6-8343-bd307e03f259.png" width="700">
+
+Se tentarmos entrar em uma página que não existe, dará erro. Se abrirmos o console, o código agora é **404**. No mundo HTTP, **404** significa que **o servidor não encontrou o recurso (Not Found)**.
+
+Pode acontecer de, durante o desenvolvimento de uma aplicação web, ocorrerem problemas no lado do servidor. Isto é normal, pois alguma lógica pode falhar e erros acontecem no desenvolvimento (e é sobre isso, amigo). Quando algum problema no servidor acontecer, também, podemos avisar o cliente através do protocolo HTTP. O código mais comum para este tipo de problema é o **500** que significa: "deu pau no servidor".
+
+Enfim, existem muitos códigos de resposta definidos no protocolo HTTP.
+
+> Há tabelas disponíveis na web que mostram esses códigos, descrevendo o significado de cada um deles. No entanto, no dia a dia, o desenvolvedor não precisa decorar todos esses códigos, mas, caso queira consultar quando for necessário, você pode entrar neste site [aqui](https://www.w3schools.com/tags/ref_httpmessages.asp).
+
+O importante é saber que:
+- Começa com 2xx: **coisa boa**
+- Começa com 3xx: normalmente significa que o navegador precisa **fazer algo a mais** pois algo mudou ou um recurso não existe mais
+- Começa com 4xx: o navegador enviou **dados errados**, como por exemplo uma URL errada
+- Começa com 5xx: caso o servidor gere algum problema
+
+No dia a dia os códigos **200**, **404** e **500** são de longe os **mais utilizados**!
+
+#
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
 ## Agradecimentos e créditos ([🔝 Voltar ao topo](#apostila-de-http))
 Espero que você tenha gostado do conteúdo e que eu tenha conseguido te ajudar!
@@ -189,3 +245,4 @@ Créditos e fontes:
 - [Rock Content](https://rockcontent.com/br/blog/http/)
 - Pai de todos, o famoso [Google](https://www.google.com)
 - [Amazon AWS](https://aws.amazon.com/pt/route53/what-is-dns/)
+- [W3 Schools](https://www.w3schools.com/tags/ref_httpmessages.asp)
