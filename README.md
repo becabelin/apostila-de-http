@@ -233,6 +233,9 @@ O importante é saber que:
 
 No dia a dia os códigos **200**, **404** e **500** são de longe os **mais utilizados**!
 
+> Dica do dia:
+> Veja os códigos http como [cachorros](https://httpstatusdogs.com) ou [gatinhos](https://http.cat)!
+
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
 ## Agradecimentos e créditos ([🔝 Voltar ao topo](#apostila-de-http))
