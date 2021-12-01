@@ -389,10 +389,11 @@ O Keep-Alive **continua existindo no HTTP2**, só que ele trouxe uma novidade. P
 Na imagem abaixo, fizemos a requisição 1 e requisição 2, quando íamos fazer requisição 3, já recebemos uma resposta:
 
 <img align="left" src="https://user-images.githubusercontent.com/69727594/144260513-9e44ecc5-1d0a-4422-890d-5084f31bd92c.png" width="400">
+
 Então, essas requisições e respostas vão chegando a **todo tempo**. É **totalmente paralelo**. A **mesma coisa** acontece com o **servidor**, **não precisamos esperar uma resposta para enviar outra**. Se já está pronta para ser enviada, ele já envia diretamente.
 
 Esse conceito que surgiu no HTTP2 é chamado de **Multiplexing** e traz uma performance bastante relevante para o nosso HTTP.
-
+<br><br>
 Informações importantes deste capítulo:
 - No HTTP/1.1 o Gzip não é nativo do protocolo, no HTTP/2 ele já vem por padrão
 - No HTTP/2 o uso do HTTPS é obrigatório, no HTTP/1.1 não
