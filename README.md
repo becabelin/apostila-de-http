@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/42/"(https://progress-bar.dev/42/ width="130")>
+    <img src="https://progress-bar.dev/50/"(https://progress-bar.dev/50/ width="130")>
  </p>
 <br><br>
 
@@ -150,6 +150,32 @@ No mundo HTTP, a requisição enviada pelo navegador para o servidor é chamada 
 Se o nosso login for válido, somos direcionados para outra página, e essa essa resposta no mundo HTTP é chamada de **HTTP RESPONSE**.
 
 A comunicação segue **sempre** esse modelo: o cliente **envia uma requisição** e o servidor **responde**. Ela (a comunicação) **sempre começa com o cliente**: é ele quem pede as informações. O servidor responde **apenas** o que foi requisitado e **nunca inicia a comunicação**!
+
+Se navegarmos pelas páginas de um site, por exemplo, ao clicarmos em alguma seção enviamos uma nova requisição e percebemos que **toda** a página foi trocada. A ideia do HTTP é essa, cada recurso é **independente** do outro e **não depende do anterior**. Isso também se aplica para os dados enviados na requisição: cada requisição é independente da outra e ela sempre deve conter todas informações para o servidor responder. Essa característica de cada requisição ser independente é chamada de **stateless**.
+
+<img align="left" src="https://user-images.githubusercontent.com/69727594/144228680-050505e0-9b20-47b8-8861-1a4be5a670f6.png" width="500">
+
+O HTTP é um protocolo que **não mantém o estado de requisições**. Só com HTTP **não há como se lembrar das requisições anteriores** enviadas para o servidor. Por isso precisamos incluir em cada requisição todas as informações, sempre. 
+
+👦🏻 : Mas, quando eu faço meu login na Alura, por exemplo, aparece todas as informações que eu coloquei na primeira vez que entrei. Por que isso acontece?
+
+Cada requisição deve enviar **todas as informações para gerar a resposta**. Ou seja, o navegador envia em cada requisição informações sobre o seu usuário. Então, se cada requisição for **independente uma da outra**, e não tiver como se lembrar das **requisições anteriores**, é certo que o navegador envia os **dados sobre o meu usuário** em **cada requisição**.
+
+👦🏻 : Então o navegador envia o login e senha em cada requisição?
+
+A resposta é **não**. Quando efetuamos o login, a Alura valida os nossos dados, certo? Nesse momento, o servidor tem certeza que o usuário existe e gera uma **identificação** quase aleatória para o usuário. Essa identificação é um número criado ao vivo e muito difícil de adivinhar. Esse número é a **identificação temporária** do usuário e ele será devolvido na resposta.
+
+👦🏻 : E o que são esses famosos **cookies**?
+
+Sabe essa **identificação** que eu acabei de falar? O navegador grava esse número em um **arquivo especial** para cada site, são os famosos **cookies**.
+
+> Se você estiver usando o navegador Chrome, pode ver os cookies do site que está logado em ```Configurações -> Privacidade -> Configurações de conteúdo... -> Todos os cookies e dados de site...```
+
+Se você **apagar** um cookie de **login**, por exemplo, **perderá sua identificação**, e aí o site exigirá um **novo login** pois não lembrará que você já estava logado.
+
+A ideia de manter dados entre requisições é algo muito comum no desenvolvimento de aplicações na web. Um usuário que se loga no sistema web causa a **criação de uma sessão**. Uma sessão então é útil para **guardar informações sobre o usuário e ações dele**. Um exemplo é um carrinho de compras: entre várias requisições estamos usando o **mesmo carrinho de compras** que guarda os nossos produtos escolhidos.
+
+Resumindo, uma sessão HTTP nada mais é que um **tempo que o cliente permanece ativo no sistema**. Ou seja, quando você se desloga de um site, ele termina a sua sessão.
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
