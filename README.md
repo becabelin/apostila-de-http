@@ -393,7 +393,9 @@ Na imagem abaixo, fizemos a requisição 1 e requisição 2, quando íamos fazer
 Então, essas requisições e respostas vão chegando a **todo tempo**. É **totalmente paralelo**. A **mesma coisa** acontece com o **servidor**, **não precisamos esperar uma resposta para enviar outra**. Se já está pronta para ser enviada, ele já envia diretamente.
 
 Esse conceito que surgiu no HTTP2 é chamado de **Multiplexing** e traz uma performance bastante relevante para o nosso HTTP.
-<br><br>
+
+<br><br><br><br>
+
 Informações importantes deste capítulo:
 - No HTTP/1.1 o Gzip não é nativo do protocolo, no HTTP/2 ele já vem por padrão
 - No HTTP/2 o uso do HTTPS é obrigatório, no HTTP/1.1 não
@@ -409,7 +411,7 @@ Informações importantes deste capítulo:
 ![Final](https://user-images.githubusercontent.com/69727594/144254835-848a8031-cc9c-475e-8a22-a9dd69bbc4c3.png)
 ## Final ([🔝 Voltar ao topo](#apostila-de-http))
 
-Bom, chegamos ao fim! 🤩
+Bom, chegamos ao fim! 🤩<br>
 Se você leu até aqui, meus parabéns! Você é um guerreiro, viu? 🤣
 
 Fico feliz de ter conseguido aprender sobre HTTP, saiba que você pode me consultar sempre que quiser sobre dúvidas, feedbacks e até mesmo para fazer amizade! Caso queira novas apostilas, me fala também, vou adorar ajudar!
