@@ -1,6 +1,6 @@
 <h3 align="center">Status da apostila:</h3>
 <p align="center"> 
-    <img src="https://progress-bar.dev/80/"(https://progress-bar.dev/80/ width="130")>
+    <img src="https://progress-bar.dev/100/"(https://progress-bar.dev/100/ width="130")>
  </p>
 <br><br>
 
@@ -20,8 +20,8 @@ Essa apostila foi criada para te ajudar a entender mais sobre o HTTP! Espero que
 - [👨🏻‍💻 Depurando a requisição HTTP](#depurando-a-requisição-http--voltar-ao-topo)
 - [📐 Parâmetros da requisição](#parâmetros-da-requisição--voltar-ao-topo)
 - [🤓 Serviços na web com REST](#serviços-na-web-com-rest--voltar-ao-topo)
-- 🌱 HTTP2 - Por uma web mais eficiente (**Em breve**)
-- 🤩 Final (**Em breve**)
+- [🌱 HTTP2 - Por uma web mais eficiente](#http2---por-uma-web-mais-eficiente--voltar-ao-topo)
+- [🤩 Final](#final--voltar-ao-topo)
 - [🥰 Agradecimentos e créditos](#agradecimentos-e-créditos--voltar-ao-topo)
 #
 
@@ -343,6 +343,90 @@ As semânticas principais são:
 - ```DELETE``` - **remove o recurso** representado pela URI passada.
 
 Quando fazemos uma aplicação não trafegamos um recurso pela rede, apenas uma representação dele. E essa representação pode ser feita de diferentes formas como JSON, XML ou HTML. Finalizando, nossas URIs devem **representar recursos**, as operações no recurso devem ser indicadas pelos **métodos HTTP** e podemos falar **qual é o formato em que conversamos com o servidor** com o **Content-Type** e **Accept** que são **cabeçalhos do HTTP**.
+
+#
+![HTTP2 - Por uma web mais eficiente](https://user-images.githubusercontent.com/69727594/144254510-0e67ed2a-88bd-4019-ba6f-918927a49a3f.png)
+## HTTP2 - Por uma web mais eficiente ([🔝 Voltar ao topo](#apostila-de-http))
+
+O protocolo que estamos trabalhando até agora foi especificado na década de 90 e de lá até hoje muitas alterações foram feitas até na forma como usamos a internet. Com a chegada do mundo mobile novas preocupações apareceram e otimizações são cada vez mais necessárias para uma boa performance. Por isso uma mudança foi necessária e em 2015 depois de alguns anos de especificações e reuniões surgiu a **versão 2** desse protocolo.
+
+A nova versão é batizada de **HTTP/2** e tem como página principal de documentação e referência essa: ```<a href="https://http2.github.io/">https://http2.github.io/</a>```. Ela traz mudanças fundamentais para a Web, recursos fantásticos que vão **melhorar muito a performance da Web** além de **simplificar a vida dos desenvolvedores**.
+
+No HTTP 1.1, para melhorar a performance, habilitamos o GZIP no servidor para comprimir os dados das respostas. É uma excelente prática, mas que precisa ser habilitada explicitamente. No HTTP/2, o GZIP é padrão e obrigatório.
+
+Apesar do protocolo HTTP/1.1 ter sido de extrema importância para a Web ao longo de vários anos, como toda boa tecnologia, é necessário um **update**. A **nova versão do HTTP** veio para adequar este protocolo tão famoso a um mundo onde temos muito mais dados sendo trafegados na rede, e a velocidade de acesso e segurança do usuário se tornam bastante importantes.
+
+A partir do HTTP2, também, não precisamos mais **repetir os Headers**, os cabeçalhos que **já enviamos em uma requisição anterior**. Logo, quando fazemos uma requisição para o ```principal.js```, onde teríamos os cabeçalhos exatamente iguais aos da requisição passada, nós não precisamos enviar novamente esses dados.
+
+Agora, se temos uma imagem, os cabeçalhos podem mudar, por exemplo, o **Host**, que pode estar especificado na página principal. Logo, na primeira requisição, o conteúdo HTML especificou que tem que buscar uma imagem do Host, que é ```image.caelum.com.br```, um subdomínio dentro da nossa aplicação. Então, esse cabeçalho terá que ser alterado, logo enviaremos apenas os cabeçalhos que são diferentes.
+
+Isso está especificado no HTTP2, para que uma requisição fique mais leve e não onere tanto o usuário. Isso é conhecido como **Headers Stateful**. Como trafegamos apenas os headers que mudam de uma requisição para outra, acabamos por economizar uma boa quantidade de dados, pois não precisamos enviar headers que mudam poucas vezes a todo momento, como o Accept.
+
+No HTTP/2, agora as novas requisições têm uma conversa mais paralela. Anteriormente estávamos trabalhando com conceitos de requisições seriais, fazíamos uma requisição e esperávamos receber, fazíamos outra requisição e esperávamos receber e por aí vai. No HTTP2, quando o cliente realiza uma requisição para ```index.html```, o servidor **devolve a página**, mas ele **já pode passar para o browser** as **informações necessárias** para que essa página possa ser, de fato, exibida. Ou seja, **ele consegue dar um passo além**.
+
+Veja a diferença entre o HTTP e o HTTP/2:<br>
+![](https://user-images.githubusercontent.com/69727594/144259716-963c2ba0-559c-4dd6-a19f-abb6d6592134.png)
+
+Isso é uma outra abordagem que surgiu no HTTP2, muito mais interessante. Mas quando o browser for interpretar essa página HTML, vai ter que passar pelo conteúdo que especifica o arquivo CSS? Sim, mas quando ele passar pelo estilo.css, vai verificar que já recebeu. Ou seja, ele percebe que já recebeu essas informações.
+
+O servidor pode empurrar para o clientes certos recursos antes mesmo de serem solicitados, pois ele consegue analisar o HTML e ver o que mais é preciso para carregar a página fazendo com que não seja necessário gastar tempo pedindo todos os outros recursos.
+Este é o conceito de **Server Push**, ou seja, o server envia dados para o cliente sem que o cliente tenha solicitado, tornando o tráfego de dados muito mais otimizado.
+
+Outra coisa importante de requisição é que temos o conceito de **request** e **response**. Cada requisição e cada resposta no HTTP1.1 são únicos.
+
+Antes dessa requisição de fato ser feita, há uma conexão, comunicação entre cliente e servidor, que chamamos de TCP. Para que consigamos realizar uma requisição via HTTP, antes existe um modelo de TCP, que é um protocolo de transporte. 
+
+> Quando fazemos uma requisição, ela é única. No HTTP, cada requisição deveria abrir uma conexão TCP, executar e fechar.
+
+Contudo, TCP é recurso caro e é um recurso que demora a ser alocado. Claro que é muito rápido a nível computacional, mas é mais um passo antes da requisição HTTP prosseguir e recebermos uma resposta.
+
+Então o que acontece, no HTTP1 existe um mecanismo chamado de **Keep-Alive**. O Keep-Alive determina **quanto tempo**, por exemplo, a **nossa conexão pode ficar ativa**. Ou seja, **não encerra essa conexão TCP**. Portanto, conseguimos realizar várias requisições com a mesma conexão TCP.
+
+Hoje, na maioria dos browsers, temos um número entre **4 e 8 de conexões simultâneas por domínio**. Significa que **se fizermos uma requisição para a página da Caelum** e a página da Caelum tiver **mil recursos**, o browser tem 4 a 8 conexões TCP ativas para **conseguir realizar essas requisições em paralelo**, e **não serial**. Mas isso na versão 1.1.
+
+O Keep-Alive **continua existindo no HTTP2**, só que ele trouxe uma novidade. Por exemplo, se temos uma conexão TCP aberta e realizamos uma requisição, poderíamos **já dar prosseguimento às próximas requisições**, isso em paralelo, sem de fato **ficar esperando o resultado dela**, e vamos recebendo essas respostas à medida em que o servidor for conseguindo processar.
+
+Na imagem abaixo, fizemos a requisição 1 e requisição 2, quando íamos fazer requisição 3, já recebemos uma resposta:
+
+<img align="left" src="https://user-images.githubusercontent.com/69727594/144260513-9e44ecc5-1d0a-4422-890d-5084f31bd92c.png" width="400">
+Então, essas requisições e respostas vão chegando a **todo tempo**. É **totalmente paralelo**. A **mesma coisa** acontece com o **servidor**, **não precisamos esperar uma resposta para enviar outra**. Se já está pronta para ser enviada, ele já envia diretamente.
+
+Esse conceito que surgiu no HTTP2 é chamado de **Multiplexing** e traz uma performance bastante relevante para o nosso HTTP.
+
+Informações importantes deste capítulo:
+- No HTTP/1.1 o Gzip não é nativo do protocolo, no HTTP/2 ele já vem por padrão
+- No HTTP/2 o uso do HTTPS é obrigatório, no HTTP/1.1 não
+- No HTTP/2 os dados são trafegados em binário, no HTTP/1.1 eles são trafegados como texto
+- O que o HTTP2 especifica é mais a nível de servidor
+- HTTP2 é nada mais que o HTTP com algumas melhorias, até porque o HTTP1 estava bastante desatualizado em relação ao que o mercado já vinha sofrendo
+- Os ```headers``` são binários e eles são comprimidos com algoritmos chamados de ```HPACK```
+- O HTTP2 habilita o GZIP como padrão na resposta, logo, esses dados vêm zipado
+- No HTTP2, as requisições e respostas podem ser paralelas
+- O HTTP2 pode enviar dados diretamente para o browser sem ficar esperando uma requisição
+
+#
+![Final](https://user-images.githubusercontent.com/69727594/144254835-848a8031-cc9c-475e-8a22-a9dd69bbc4c3.png)
+## Final ([🔝 Voltar ao topo](#apostila-de-http))
+
+Bom, chegamos ao fim! 🤩
+Se você leu até aqui, meus parabéns! Você é um guerreiro, viu? 🤣
+
+Fico feliz de ter conseguido aprender sobre HTTP, saiba que você pode me consultar sempre que quiser sobre dúvidas, feedbacks e até mesmo para fazer amizade! Caso queira novas apostilas, me fala também, vou adorar ajudar!
+
+Nesta apostila você aprendeu sobre:
+- O que é HTTP
+- Diferença entre HTTP e HTTPS
+- SSL/TSL
+- Porque usar HTTPS
+- Criptografia e certificados digitais
+- Domínios e subdomínios
+- Endereço IP, DNS e portas
+- Requisições, sessões e cookies
+- Como usar as ferramentas de desenvolvedor
+- Códigos HTTP
+- Parâmetros de requisição
+- Serviços na web e REST
+- HTTP2
 
 #
 ![Agradecimentos e créditos](https://user-images.githubusercontent.com/69727594/142418935-56f66bb7-5563-4e6e-9f47-84931290fd6a.png)
